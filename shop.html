@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - Peddy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css"/>
+    <style>
+      .navbar-cute {
+        background: linear-gradient(135deg, #0E7A81 0%, #1a9ba8 100%);
+        box-shadow: 0 4px 15px rgba(14, 122, 129, 0.2);
+      }
+      .navbar-cute .navbar-start a, 
+      .navbar-cute .menu a {
+        color: white;
+        transition: all 0.3s ease;
+      }
+      .navbar-cute .menu a:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+        border-radius: 8px;
+      }
+      .logo-text {
+        background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 800;
+        font-size: 24px;
+        letter-spacing: 1px;
+      }
+      .product-card {
+        background: linear-gradient(135deg, #f8fafb 0%, #ffffff 100%);
+        border: 2px solid #e0f2f1;
+        border-radius: 16px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(14, 122, 129, 0.1);
+        overflow: hidden;
+      }
+      .product-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 24px rgba(14, 122, 129, 0.2);
+        border-color: #0E7A81;
+      }
+      .product-image {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        background: linear-gradient(135deg, #e0f7fa 0%, #b3e5fc 100%);
+      }
+      .add-to-cart-btn {
+        background: linear-gradient(135deg, #0E7A81 0%, #1a9ba8 100%);
+        transition: all 0.3s ease;
+      }
+      .add-to-cart-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(14, 122, 129, 0.3);
+      }
+      .filter-btn.active {
+        background: linear-gradient(135deg, #0E7A81 0%, #1a9ba8 100%);
+        color: white;
+      }
+      .filter-btn {
+        transition: all 0.3s ease;
+      }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation Bar -->
+    <header class="">
+        <nav class="w-full">
+            <div class="navbar navbar-cute px-4 lg:px-10 py-4 rounded-b-xl">
+                <div class="navbar-start gap-3">
+                 <a href="index.html"><img class="w-12 h-12 drop-shadow-lg" src="images/logo.webp" alt="Peddy Logo"></a>
+                  <a href="index.html" class="logo-text">Peddy</a>
+                </div>
+                <div class="navbar-center hidden lg:flex">
+                  <ul class="menu menu-horizontal px-1 gap-2">
+                    <li><a href="index.html" class="rounded-lg px-4 py-2 font-semibold">Home</a></li>
+                    <li><a href="shop.html" class="rounded-lg px-4 py-2 font-semibold bg-white bg-opacity-20">Shop</a></li>
+                    <li><a href="contact.html" class="rounded-lg px-4 py-2 font-semibold">Contact</a></li>
+                  </ul>
+                </div>
+                <div class="navbar-end gap-3">
+                 <div class="form-control">
+                   <input type="text" placeholder="Search products..." class="input input-bordered w-32 lg:w-64 rounded-lg" id="searchInput">
+                 </div>
+                 <button class="btn btn-circle btn-ghost hover:bg-white hover:bg-opacity-20">
+                   <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                   </svg>
+                 </button>
+                 <button class="btn btn-circle btn-ghost hover:bg-white hover:bg-opacity-20">
+                 <img class="w-6 h-6" src="images/icons8-user-24.png" alt="User">
+                 </button>
+                </div>
+              </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-[#0E7A81] to-[#1a9ba8] text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-5xl font-bold mb-4">Pet Shop</h2>
+            <p class="text-xl text-opacity-90">Everything your pet needs to be happy and healthy!</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <!-- Sidebar with Filters -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-md p-6 sticky top-20">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">Filters</h3>
+                    
+                    <!-- Category Filter -->
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-gray-700 mb-3">Category</h4>
+                        <div class="space-y-2">
+                            <button class="filter-btn active w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100" data-filter="all">All Products</button>
+                            <button class="filter-btn w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100" data-filter="food">Pet Food</button>
+                            <button class="filter-btn w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100" data-filter="toys">Toys</button>
+                            <button class="filter-btn w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100" data-filter="accessories">Accessories</button>
+                            <button class="filter-btn w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100" data-filter="health">Health & Care</button>
+                        </div>
+                    </div>
+
+                    <!-- Price Filter -->
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-gray-700 mb-3">Price Range</h4>
+                        <input type="range" min="0" max="500" value="500" class="w-full accent-[#0E7A81]" id="priceRange">
+                        <p class="text-sm text-gray-600 mt-2">$0 - $<span id="priceValue">500</span></p>
+                    </div>
+
+                    <!-- Clear Filters -->
+                    <button class="w-full bg-gradient-to-r from-[#0E7A81] to-[#1a9ba8] text-white py-2 rounded-lg hover:shadow-lg transition">Clear Filters</button>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="lg:col-span-3">
+                <!-- Sort Options -->
+                <div class="flex justify-between items-center mb-6">
+                    <p class="text-gray-600"><span id="productCount">12</span> products found</p>
+                    <select class="select select-bordered rounded-lg">
+                        <option selected>Sort by Newest</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                        <option>Best Rating</option>
+                    </select>
+                </div>
+
+                <!-- Products -->
+                <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Product Card 1 -->
+                    <div class="product-card" data-category="food" data-price="25">
+                        <img src="https://via.placeholder.com/300x250/FFD700/000000?text=Dog+Food" alt="Premium Dog Food" class="product-image">
+                        <div class="p-4">
+                            <h4 class="text-lg font-bold text-gray-800 mb-1">Premium Dog Food</h4>
+                            <p class="text-sm text-gray-600 mb-3">Nutritious formula for healthy pups</p>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-2xl font-bold text-[#0E7A81]">$25.99</span>
+                                <div class="flex gap-1">
+                                    <span class="text-yellow-400">★★★★★</span>
+                                </div>
+                            </div>
+                            <button class="add-to-cart-btn w-full text-white py-2 rounded-lg font-semibold">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 2 -->
+                    <div class="product-card" data-category="toys" data-price="15">
+                        <img src="https://via.placeholder.com/300x250/FF6B6B/FFFFFF?text=Chew+Toys" alt="Durable Chew Toys" class="product-image">
+                        <div class="p-4">
+                            <h4 class="text-lg font-bold text-gray-800 mb-1">Durable Chew Toys</h4>
+                            <p class="text-sm text-gray-600 mb-3">Set of 5 colorful chew toys</p>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-2xl font-bold text-[#0E7A81]">$15.99</span>
+                                <div class="flex gap-1">
+                                    <span class="text-yellow-400">★★★★☆</span>
+                                </div>
+                            </div>
+                            <button class="add-to-cart-btn w-full text-white py-2 rounded-lg font-semibold">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 3 -->
+                    <div class="product-card" data-category="accessories" data-price="35">
+                        <img src="https://via.placeholder.com/300x250/4ECDC4/000000?text=Pet+Collar" alt="Premium Pet Collar" class="product-image">
+                        <div class="p-4">
+                            <h4 class="text-lg font-bold text-gray-800 mb-1">Premium Pet Collar</h4>
+                            <p class="text-sm text-gray-600 mb-3">Comfortable leather with ID tag</p>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-2xl font-bold text-[#0E7A81]">$34.99</span>
+                                <div class="flex gap-1">
+                                    <span class="text-yellow-400">★★★★★</span>
+                                </div>
+                            </div>
+                            <button class="add-to-cart-btn w-full text-white py-2 rounded-lg font-semibold">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 4 -->
+                    <div class="product-card" data-category="health" data-price="45">
+                        <img src="https://via.placeholder.com/300x250/95E1D3/000000?text=Grooming+Kit" alt="Complete Grooming Kit" class="product-image">
+                        <div class="p-4">
+                            <h4 class="text-lg font-bold text-gray-800 mb-1">Complete Grooming Kit</h4>
+                            <p class="text-sm text-gray-600 mb-3">7-piece professional grooming set</p>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-2xl font-bold text-[#0E7A81]">$44.99</span>
+                                <div class="flex gap-1">
+                                    <span class="text-yellow-400">★★★★★</span>
+                                </div>
+                            </div>
+                            <button class="add-to-cart-btn w-full text-white py-2 rounded-lg font-semibold">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 5 -->
+                    <div class="product-card" data-category="food" data-price="30">
+                        <img src="https://via.placeholder.com/300x250/F7DC6F/000000?text=Cat+Food" alt="Gourmet Cat Food" class="product-image">
+                        <div class="p-4">
+                            <h4 class="text-lg font-bold text-gray-800 mb-1">Gourmet Cat Food</h4>
+                            <p class="text-sm text-gray-600 mb-3">Premium blend with natural ingredients</p>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-2xl font-bold text-[#0E7A81]">$29.99</span>
+                                <div class="flex gap-1">
+                                    <span class="text-yellow-400">★★★★★</span>
+                                </div>
+                            </div>
+                            <button class="add-to-cart-btn w-full text-white py-2 rounded-lg font-semibold">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 6 -->
+                    <div class="product-card" data-category="toys" data-price="20">
+                        <img src="https://via.placeholder.com/300x250/BB8FCE/FFFFFF?text=Tennis+Balls" alt="Interactive Tennis Balls" class="product-image">
+                        <div class="p-4">
+                            <h4 class="text-lg font-bold text-gray-800 mb-1">Interactive Tennis Balls</h4>
+                            <p class="text-sm text-gray-600 mb-3">Pack of 10 - squeaky toy included</p>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-2xl font-bold text-[#0E7A81]">$19.99</span>
+                                <div class="flex gap-1">
+                                    <span class="text-yellow-400">★★★★☆</span>
+                                </div>
+                            </div>
+                            <button class="add-to-cart-btn w-full text-white py-2 rounded-lg font-semibold">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 7 -->
+                    <div class="product-card" data-category="accessories" data-price="50">
+                        <img src="https://via.placeholder.com/300x250/F8B88B/000000?text=Pet+Bed" alt="Orthopedic Pet Bed" class="product-image">
+                        <div class="p-4">
+                            <h4 class="text-lg font-bold text-gray-800 mb-1">Orthopedic Pet Bed</h4>
+                            <p class="text-sm text-gray-600 mb-3">Memory foam for ultimate comfort</p>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-2xl font-bold text-[#0E7A81]">$49.99</span>
+                                <div class="flex gap-1">
+                                    <span class="text-yellow-400">★★★★★</span>
+                                </div>
+                            </div>
+                            <button class="add-to-cart-btn w-full text-white py-2 rounded-lg font-semibold">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 8 -->
+                    <div class="product-card" data-category="health" data-price="22">
+                        <img src="https://via.placeholder.com/300x250/A9DFBF/000000?text=Dental+Treats" alt="Dental Care Treats" class="product-image">
+                        <div class="p-4">
+                            <h4 class="text-lg font-bold text-gray-800 mb-1">Dental Care Treats</h4>
+                            <p class="text-sm text-gray-600 mb-3">Natural teeth cleaning formula</p>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-2xl font-bold text-[#0E7A81]">$21.99</span>
+                                <div class="flex gap-1">
+                                    <span class="text-yellow-400">★★★★★</span>
+                                </div>
+                            </div>
+                            <button class="add-to-cart-btn w-full text-white py-2 rounded-lg font-semibold">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 9 -->
+                    <div class="product-card" data-category="toys" data-price="18">
+                        <img src="https://via.placeholder.com/300x250/F5B7B1/000000?text=Fetch+Stick" alt="Flying Fetch Stick" class="product-image">
+                        <div class="p-4">
+                            <h4 class="text-lg font-bold text-gray-800 mb-1">Flying Fetch Stick</h4>
+                            <p class="text-sm text-gray-600 mb-3">Perfect for outdoor play sessions</p>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-2xl font-bold text-[#0E7A81]">$17.99</span>
+                                <div class="flex gap-1">
+                                    <span class="text-yellow-400">★★★★☆</span>
+                                </div>
+                            </div>
+                            <button class="add-to-cart-btn w-full text-white py-2 rounded-lg font-semibold">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 10 -->
+                    <div class="product-card" data-category="accessories" data-price="40">
+                        <img src="https://via.placeholder.com/300x250/D7BDE2/FFFFFF?text=Food+Bowls" alt="Stainless Steel Bowls" class="product-image">
+                        <div class="p-4">
+                            <h4 class="text-lg font-bold text-gray-800 mb-1">Stainless Steel Bowls</h4>
+                            <p class="text-sm text-gray-600 mb-3">Double bowl set with rubber base</p>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-2xl font-bold text-[#0E7A81]">$39.99</span>
+                                <div class="flex gap-1">
+                                    <span class="text-yellow-400">★★★★★</span>
+                                </div>
+                            </div>
+                            <button class="add-to-cart-btn w-full text-white py-2 rounded-lg font-semibold">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 11 -->
+                    <div class="product-card" data-category="health" data-price="55">
+                        <img src="https://via.placeholder.com/300x250/85C1E2/000000?text=Pet+Vitamins" alt="Multivitamin Supplements" class="product-image">
+                        <div class="p-4">
+                            <h4 class="text-lg font-bold text-gray-800 mb-1">Multivitamin Supplements</h4>
+                            <p class="text-sm text-gray-600 mb-3">Boost immunity & joint health</p>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-2xl font-bold text-[#0E7A81]">$54.99</span>
+                                <div class="flex gap-1">
+                                    <span class="text-yellow-400">★★★★★</span>
+                                </div>
+                            </div>
+                            <button class="add-to-cart-btn w-full text-white py-2 rounded-lg font-semibold">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 12 -->
+                    <div class="product-card" data-category="food" data-price="28">
+                        <img src="https://via.placeholder.com/300x250/F1948A/000000?text=Treats+Mix" alt="Mixed Flavor Treats" class="product-image">
+                        <div class="p-4">
+                            <h4 class="text-lg font-bold text-gray-800 mb-1">Mixed Flavor Treats</h4>
+                            <p class="text-sm text-gray-600 mb-3">Variety pack - dogs love it!</p>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-2xl font-bold text-[#0E7A81]">$27.99</span>
+                                <div class="flex gap-1">
+                                    <span class="text-yellow-400">★★★★★</span>
+                                </div>
+                            </div>
+                            <button class="add-to-cart-btn w-full text-white py-2 rounded-lg font-semibold">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black text-slate-100 py-10 mt-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="flex gap-2 mb-4">
+                        <img src="images/logo.webp" alt="Peddy" class="w-10 h-10">
+                        <p class="font-bold text-white text-xl">Peddy</p>
+                    </div>
+                    <p class="text-gray-400">Everything for your beloved pets in one place.</p>
+                </div>
+                <div>
+                    <h6 class="text-white font-bold mb-4">Quick Links</h6>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="index.html" class="hover:text-white transition">Home</a></li>
+                        <li><a href="shop.html" class="hover:text-white transition">Shop</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h6 class="text-white font-bold mb-4">Support</h6>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Shipping Info</a></li>
+                        <li><a href="#" class="hover:text-white transition">Returns</a></li>
+                        <li><a href="#" class="hover:text-white transition">FAQs</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
+                <p>&copy; 2026 Peddy Shop. All rights reserved. Made with ❤️ for pet lovers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const priceRange = document.getElementById('priceRange');
+        const priceValue = document.getElementById('priceValue');
+        const productCards = document.querySelectorAll('.product-card');
+        const productCount = document.getElementById('productCount');
+        const searchInput = document.getElementById('searchInput');
+
+        let activeFilter = 'all';
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active', 'text-white'));
+                btn.classList.add('active', 'text-white');
+                activeFilter = btn.dataset.filter;
+                filterProducts();
+            });
+        });
+
+        priceRange.addEventListener('input', (e) => {
+            priceValue.textContent = e.target.value;
+            filterProducts();
+        });
+
+        searchInput.addEventListener('input', filterProducts);
+
+        function filterProducts() {
+            const maxPrice = parseInt(priceRange.value);
+            const searchTerm = searchInput.value.toLowerCase();
+            let visibleCount = 0;
+
+            productCards.forEach(card => {
+                const category = card.dataset.category;
+                const price = parseInt(card.dataset.price);
+                const productName = card.querySelector('h4').textContent.toLowerCase();
+
+                const categoryMatch = activeFilter === 'all' || category === activeFilter;
+                const priceMatch = price <= maxPrice;
+                const searchMatch = productName.includes(searchTerm);
+
+                if (categoryMatch && priceMatch && searchMatch) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            productCount.textContent = visibleCount;
+        }
+
+        // Add to cart functionality
+        document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.textContent = '✓ Added!';
+                btn.style.backgroundColor = '#10b981';
+                setTimeout(() => {
+                    btn.textContent = 'Add to Cart';
+                    btn.style.backgroundColor = '';
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
